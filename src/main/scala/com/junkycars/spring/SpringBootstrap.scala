@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
  */
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableMongoRepositories(basePackages=Array("com.junkycars.domain.repo"))
-@ComponentScan(Array("com.junkycars.domain"))
+@EnableMongoRepositories(basePackages=Array("com.junkcars.domain.repo"))
+@ComponentScan(Array("com.junkcars.domain"))
 class SpringBootstrap extends AbstractMongoConfiguration {
 
   override protected  def  getDatabaseName:  String = "junkycars"

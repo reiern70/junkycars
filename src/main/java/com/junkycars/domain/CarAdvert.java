@@ -1,12 +1,18 @@
 package com.junkycars.domain;
 
 
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document(collection="CarAdvert")
+@CompoundIndexes({
+        @CompoundIndex(name = "CarAdvert_unique_id", def = "{'user': 1, firstRegistration: 1}", unique = true)
+})
+
 public class CarAdvert extends MongoBase {
 
     @Indexed
@@ -16,7 +22,7 @@ public class CarAdvert extends MongoBase {
     private String fuelType;
     private Integer price;
     private Boolean isNew;
-    private String mileage;
+    private Integer mileage;
     private Date firstRegistration;
     private String user;
 
@@ -47,6 +53,10 @@ public class CarAdvert extends MongoBase {
         this.fuelType = fuelType;
     }
 
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType.getUuid();
+    }
+
     public Integer getPrice() {
         return price;
     }
@@ -63,11 +73,11 @@ public class CarAdvert extends MongoBase {
         isNew = aNew;
     }
 
-    public String getMileage() {
+    public Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(String mileage) {
+    public void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
 
@@ -89,5 +99,25 @@ public class CarAdvert extends MongoBase {
 
     public void setUser(User user) {
         this.user = user.getUuid();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CarAdvert carAdvert = (CarAdvert) o;
+
+        if (!firstRegistration.equals(carAdvert.firstRegistration)) return false;
+        return user.equals(carAdvert.user);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstRegistration.hashCode();
+        result = 31 * result + user.hashCode();
+        return result;
     }
 }

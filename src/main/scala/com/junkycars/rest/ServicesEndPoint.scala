@@ -1,10 +1,10 @@
 package com.junkycars.rest
 
+import org.json4s.{DefaultFormats, Formats}
+import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, ScalatraFilter}
 
-class EndPoint extends ScalatraFilter with  CorsSupport {
-
-
+class ServicesEndPoint extends ScalatraFilter with  CorsSupport with JacksonJsonSupport {
 
   get("/cars") {
     <p>
@@ -15,4 +15,5 @@ class EndPoint extends ScalatraFilter with  CorsSupport {
     </p>
   }
 
+  override protected implicit def jsonFormats: Formats = DefaultFormats
 }
