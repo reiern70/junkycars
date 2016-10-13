@@ -1,7 +1,9 @@
 package com.junkycars.spring
 
+import com.junkcars.domain.logic.ICarAdvertsLogic
+import com.junkcars.domain.logic.impl.CarsAdvertsLogic
 import com.mongodb.{Mongo, MongoClient, ReadPreference}
-import org.springframework.context.annotation.{ComponentScan, Configuration}
+import org.springframework.context.annotation.{Bean, ComponentScan, Configuration}
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 import org.springframework.transaction.annotation.EnableTransactionManagement
@@ -23,4 +25,7 @@ class SpringBootstrap extends AbstractMongoConfiguration {
     mongoClient.setReadPreference(ReadPreference.secondaryPreferred())
     mongoClient
   }
+
+  @Bean
+  def getAdvertsLogic: ICarAdvertsLogic = new CarsAdvertsLogic
 }

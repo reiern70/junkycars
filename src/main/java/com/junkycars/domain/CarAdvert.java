@@ -20,10 +20,14 @@ public class CarAdvert extends MongoBase {
     private String description;
     @Indexed
     private String fuelType;
+    @Indexed
     private Integer price;
     private Boolean isNew;
+    @Indexed
     private Integer mileage;
+    @Indexed
     private Date firstRegistration;
+    @Indexed
     private String user;
 
     public CarAdvert() {

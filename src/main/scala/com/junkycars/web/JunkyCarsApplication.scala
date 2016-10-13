@@ -3,6 +3,7 @@ package com.junkycars.web
 import java.util.{Date, Calendar}
 import javax.inject.Inject
 
+import com.junkcars.domain.logic.ICarAdvertsLogic
 import com.junkcars.domain.repo.{IFuelTypesRepo, IUsersRepo, ICarAdvertsRepo}
 import com.junkycars.domain.{CarAdvert, FuelType, User}
 import de.agilecoders.wicket.core.Bootstrap
@@ -44,6 +45,9 @@ class JunkyCarsApplication extends WebApplication {
   var usersRepo: IUsersRepo = _
   @Inject
   var fuelTypesRepo: IFuelTypesRepo = _
+
+  @Inject
+  var advertsLogic: ICarAdvertsLogic = _
 
   override def init(): Unit = {
     super.init()
